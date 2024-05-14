@@ -505,10 +505,19 @@
 
 <a href="https://ibb.co/gFy3vHf"><img src="/vsdl_dpc.github.io/images/blog/mediseg1.jpg" alt="mediseg1" height="273"></a>
 
+<p>(b)是在(a)上面的一个改进，用于减少计算量的。这种改进被证实是可以显著的影响模型的识别精度的，但是少有人在自己的论文中介绍backbone network的时候提及这种改进。那么，基于这两种不一样形式的backbone的实验结果比较，显然是不公平的。</p>
+
 
 <h5 id="method">2 研究方法</h2>
+  <p>1. 按照深度学习模型部署的6个阶段，我们首先搜集了一些大家经常会使用但又被容易忽略的Tricks</p>
+
+  <p>1. 以2D和3D的医学图像为实验对象，进行了大量的实验以显式地探索这些Tricks对模型性能的影响</p>
 
 <h5 id="conclusion">3 研究结论</h2>
+  <p>1. Tricks很重要，可以显著地影响模型的识别性能 </p>
+  <p>2. 某些Tricks具有跨数据、跨模态、跨模型的迁移性 </p>
+  <p>3. Tricks本质上对应的是解决了语义分割中的一些Challenges，因此在部署Tricks的时候需要考虑到想要解决的Challenges之间的内在关联 </p>
+  <p>4. 基于这些Tricks的实验结论可以帮助我们将来在解决2D和3D图像语义分割Challenges的时候提供实际的指导 </p>
 
 
 
