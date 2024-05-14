@@ -503,11 +503,11 @@
 <h5 id="title">1 研究动机</h2>
   <p>我们这篇论文的出发点是想要解决大家一直以来诟病的一个问题，即深度学习模型的architecture和setting过于复杂，导致实验结果的比较存在不公平性。举个常见的栗子，比如大家都会用到的ResNet，几乎每个人都会在论文中说“Our backbone network is ResNet-50 or ResNet-101.”, 但是其实在部署的时候，ResNet的input stem存在两种不一样的形式，如下图：</p>
   <a href="https://ibb.co/gFy3vHf"><img src="/vsdl_dpc.github.io/images/blog/mediseg1.jpg" alt="mediseg1" height="273"></a>
-  <p>(b)是在(a)上面的一个改进，用于减少计算量的。这种改进被证实是可以显著的影响模型的识别精度的，但是少有人在自己的论文中介绍backbone network的时候提及这种改进。那么，基于这两种不一样形式的backbone的实验结果比较，显然是不公平的。</p>
+  <p>其中，(b)是在(a)上面的一个改进，用于减少计算量的。这种改进被证实是可以显著的影响模型的识别精度的，但是少有人在自己的论文中介绍backbone network的时候提及这种改进。那么，基于这两种不一样形式的backbone的实验结果比较，显然是不公平的。</p>
 
 
 <h5 id="method">2 研究方法</h2>
-   <p>我们首先收集了一系列针对不同模型部署阶段的Tricks。这些Tricks主要可以被划分为以下6个方面：</p>
+   <p>我们首先收集了一系列针对不同模型部署阶段的Tricks，这些Tricks主要可以被划分为以下6个方面：</p>
    <a href="https://ibb.co/gFy3vHf"><img src="/vsdl_dpc.github.io/images/blog/mediseg2.jpg" alt="mediseg1" height="350"></a>
    <p>其次，在这些Tricks的基础上，我们通过实验探索了这些Tricks在一致的基准模型和数据集上对于实验结果的影响。为了能全面的覆盖2D和3D数据，我们以医学图像语义分割数据为实验对象，选择了4个常用的医学图像语义分割数据集，即2D ISIC 2018，2D CoNIC，3D KiTS19和3D LiTS，所采用的基准模型分别是2D-UNet和3D-UNet</p>
   <h6 id="method">MedISeg的优势</h2>
@@ -522,9 +522,10 @@
 <h5 id="conclusion">4 未来的方向</h2>
   <p>对于本文研究的内容以及面向医学图像语义分割任务，将来可以在以下几个方面继续展开研究：</p>
    <p>1. 调研和开发更多的面向医学图像语义分割的tricks</p>
-   <p>2. 继续在更多的方法和数据集上探索其他tricks的有效性。这也是我们接下来的一段时间会继续做的事情，对应的内容会持续在GitHub上进行更新</p>
+   <p>2. 继续在更多的方法和数据集上探索其他tricks的有效性。</p>
    <p>3. 前面提到的，tricks其实对应的是解决了语义分割任务中的一些Challenges。那么反过来，我们其实也可以利用tricks来指导我们的模型设计，使得我们的模型也具有“又好又快”的效果</p>
-   <p>4. 探索基于attention方法和框架的tricks</p>
+<h5 id="conclusion">5 全文总结</h2>
+  <p>对于本文研究的内容以及面向医学图像语义分割任务，将来可以在以下几个方面继续展开研究：</p>
 
   </section>
 
