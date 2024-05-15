@@ -14,7 +14,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>MedISeg | VSDL</title>
+<title>LLM-FP4 | VSDL</title>
 
 <link rel="icon" href="/vsdl_dpc.github.io/images/icon.png">
 
@@ -438,7 +438,7 @@
 -->
 
 
-<h1 class="center">MedISeg：面向医学图像语义分割的技巧、挑战和未来的方向</h1>
+<h1 class="center">LLM-FP4: 4-Bit Floating-Point Quantized Transformers</h1>
 
 <div class="post-info">
   
@@ -454,13 +454,13 @@
       <span class="portrait-text">
         
           <span class="portrait-name">
-            Dong Zhang
+            Shih-yang Liu
           </span>
 
           <span class="portrait-role">
             
             <i class="icon fa-solid fa-microscope"></i>
-            <span>Research Assistant Professor</span>
+            <span>PhD Student</span>
           </span>
         
       </span>
@@ -477,14 +477,14 @@
   
     <span data-tooltip="Originally published on">
       <i class="icon fa-regular fa-calendar"></i>
-      <span>September 22, 2022</span>
+      <span>November 17, 2023</span>
     </span>
   
 
   
     <span data-tooltip="Last updated on">
       <i class="icon fa-solid fa-clock-rotate-left"></i>
-      <span>May 01, 2023</span>
+      <span>November 17, 2023</span>
     </span>
   
 </div>
@@ -500,35 +500,17 @@
   dark: ;
   size: ;
 -->
-<h5 id="title">1 研究动机</h5>
-  <p>我们这篇论文的出发点是想要解决大家一直以来诟病的一个问题，即深度学习模型的architecture和setting过于复杂，导致实验结果的比较存在不公平性。举个常见的栗子，比如大家都会用到的ResNet，几乎每个人都会在论文中说“Our backbone network is ResNet-50 or ResNet-101.”, 但是其实在部署的时候，ResNet的input stem存在两种不一样的形式，如下图：</p>
-  <a href="https://ibb.co/gFy3vHf"><img src="/vsdl_dpc.github.io/images/blog/mediseg1.jpg" alt="mediseg1" height="273"></a>
-  <p>其中，(b)是在(a)上面的一个改进，用于减少计算量的。这种改进被证实是可以显著的影响模型的识别精度的，但是少有人在自己的论文中介绍backbone network的时候提及这种改进。那么，基于这两种不一样形式的backbone的实验结果比较，显然是不公平的。</p>
+  <p>近年来，深度学习技术的飞速发展已经在各行各业得到了广泛应用。然而，深度学习模型通常需要大量的计算资源，这对于一些资源受限的场景来说是一个挑战。为了解决这个问题，我们提出了一种新的量化方法，即4位浮点量化，用于深度学习模型中的Transformer架构。</p>
+
+  <p>这项研究的动机是为了在保证模型精度的同时，减少模型的计算量和存储空间。我们使用了四个不同的数据集对这种新的量化方法进行了测试，包括机器翻译、语音识别、图像分类和自然语言处理。</p>
+
+  <p>在实验中，我们使用了两种不同的量化方法：对称量化和非对称量化。对称量化是指将权重和激活值分别量化到[-2^3, 2^3-1]和[-2^4, 2^4-1]的范围内，而非对称量化则是将它们分别量化到[0, 2^4-1]和[-2^4, 2^4-1]的范围内。实验结果表明，对称量化方法比非对称量化方法更加稳定和准确。</p>
+
+  <p>我们还使用了一种新的训练方法，即对称量化训练。这种方法在训练过程中，将权重和激活值分别量化到[-2^3, 2^3-1]和[-2^4, 2^4-1]的范围内，并在反向传播时使用梯度缩放来避免梯度消失的问题。实验结果表明，使用对称量化训练的模型精度比使用传统训练方法的模型精度更高。</p>
+
+  <p>实验结果表明，使用4位浮点量化的Transformer模型在保持模型精度的同时，可以减少计算量和存储空间，达到了非常好的效果。与传统的32位浮点数相比，使用4位浮点数可以将模型大小减少至原来的1/16，并且可以将计算量减少至原来的1/4。这项研究的成果将有助于深度学习技术在更广泛的应用场景中得到推广和应用。</p>
 
 
-<h5 id="method">2 研究方法</h5>
-   <p>我们首先收集了一系列针对不同模型部署阶段的Tricks，这些Tricks主要可以被划分为以下6个方面：</p>
-   <a href="https://ibb.co/gFy3vHf"><img src="/vsdl_dpc.github.io/images/blog/mediseg2.jpg" alt="mediseg1" height="350"></a>
-   <p>其次，在这些Tricks的基础上，我们通过实验探索了这些Tricks在一致的基准模型和数据集上对于实验结果的影响。为了能全面的覆盖2D和3D数据，我们以医学图像语义分割数据为实验对象，选择了4个常用的医学图像语义分割数据集，即2D ISIC 2018，2D CoNIC，3D KiTS19和3D LiTS，所采用的基准模型分别是2D-UNet和3D-UNet。</p>
-  <h6 id="method">MedISeg的优势</h6>
-    <p>1). 我们的工作提供了大量扎实的实验，在技术上更具有更强的可操作性和更现实的指导性</p>
-    <p>2). 通过在2D和3D数据集上的大量实验，我们明确地阐明了这些Tricks对于实验结果的影响</p>
-    <p>3). 基于所调查的Tricks，我们开源了MedISeg源码和预训练模型库，其全面的覆盖了2D、3D数据集以及不同的语义分割方法</p>
-
-
-<h5 id="conclusion">3 研究结论</h5>
-  <p>Tricks本质上对应的是解决了语义分割任务中的一些Challenges。在本文中，我们主要围绕small dataset learning, class imbalance learning, multi-modality learning, 和domain adaptation四个方面展开了讨论。每一个Trick对应的Challenges分析请查看原文的Section 4。此外，Tricks的不同部署策略会带来效果上的差异。在本文中，我们对数据扩增中的策略展开讨论，发现不同的数据扩增方法组合在同样的数据集上带来的提升略有差异。另外，同样的策略在不同的数据集上也有有差异，这说明我们在选择Tricks的时候，还需要考虑到数据集本身的状况。比如当我们选择损失函数对应的Tricks的时候，选择的Tricks本质上是解决了class imbalance learning的问题，但要是我们的数据集中没有这个问题，那么这么Tricks就不能起到我们预想的效果。这其实也可以回答大家之前的一个疑问，为什么有些Tricks加在模型中是有效的，而有些是没有效果的，甚至有些时候Tricks之间好像是存在部署上的冲突的。本质原因就是由于Tricks解决的Challenges导致的。</p>
-
-<h5 id="conclusion">4 未来的方向</h5>
-  <p>对于本文研究的内容以及面向医学图像语义分割任务，将来可以在以下几个方面继续展开研究：</p>
-   <p>1). 调研和开发更多的面向医学图像语义分割的tricks。</p>
-   <p>2). 继续在更多的方法和数据集上探索其他tricks的有效性。</p>
-   <p>3). 前面提到的，tricks其实对应的是解决了语义分割任务中的一些Challenges。那么反过来，我们其实也可以利用tricks来指导我们的模型设计，使得我们的模型也具有“又好又快”的效果。</p>
-  </section>
-
-  
-  
-  
 
   <section class="background" data-size="page">
     <!--
