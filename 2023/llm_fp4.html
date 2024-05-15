@@ -447,8 +447,8 @@
       
 
 <div class="portrait-wrapper">
-  <a href="/vsdl_dpc.github.io/members/dong-zhang.html" class="portrait" data-style="tiny" aria-label="Jane Smith">
-    <img src="/vsdl_dpc.github.io/images/dongzhang.jpg" class="portrait-image" alt="member portrait" loading="lazy" onerror="this.src = '/vsdl_dpc.github.io/images/fallback.svg'; this.onerror = null;">
+  <a href="/vsdl_dpc.github.io/members/dong-zhang.html" class="portrait" data-style="tiny" aria-label="Shih-yang Liu">
+    <img src="/vsdl_dpc.github.io/images/photo.jpg" class="portrait-image" alt="member portrait" loading="lazy" onerror="this.src = '/vsdl_dpc.github.io/images/fallback.svg'; this.onerror = null;">
 
     
       <span class="portrait-text">
@@ -502,9 +502,7 @@
 -->
   <p>近年来，深度学习技术的飞速发展已经在各行各业得到了广泛应用。然而，深度学习模型通常需要大量的计算资源，这对于一些资源受限的场景来说是一个挑战。为了解决这个问题，我们提出了一种新的量化方法，即4位浮点量化，用于深度学习模型中的Transformer架构。</p>
 
-  <p>这项研究的动机是为了在保证模型精度的同时，减少模型的计算量和存储空间。我们使用了四个不同的数据集对这种新的量化方法进行了测试，包括机器翻译、语音识别、图像分类和自然语言处理。</p>
-
-  <p>在实验中，我们使用了两种不同的量化方法：对称量化和非对称量化。对称量化是指将权重和激活值分别量化到[-2^3, 2^3-1]和[-2^4, 2^4-1]的范围内，而非对称量化则是将它们分别量化到[0, 2^4-1]和[-2^4, 2^4-1]的范围内。实验结果表明，对称量化方法比非对称量化方法更加稳定和准确。</p>
+  <p>这项研究的动机是为了在保证模型精度的同时，减少模型的计算量和存储空间。我们使用了四个不同的数据集对这种新的量化方法进行了测试，包括机器翻译、语音识别、图像分类和自然语言处理。在实验中，我们使用了两种不同的量化方法：对称量化和非对称量化。对称量化是指将权重和激活值分别量化到[-2^3, 2^3-1]和[-2^4, 2^4-1]的范围内，而非对称量化则是将它们分别量化到[0, 2^4-1]和[-2^4, 2^4-1]的范围内。实验结果表明，对称量化方法比非对称量化方法更加稳定和准确。</p>
 
   <p>我们还使用了一种新的训练方法，即对称量化训练。这种方法在训练过程中，将权重和激活值分别量化到[-2^3, 2^3-1]和[-2^4, 2^4-1]的范围内，并在反向传播时使用梯度缩放来避免梯度消失的问题。实验结果表明，使用对称量化训练的模型精度比使用传统训练方法的模型精度更高。</p>
 
