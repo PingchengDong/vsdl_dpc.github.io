@@ -14,7 +14,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>MedISeg | VSDL</title>
+<title>LLM-FP4 | VSDL</title>
 
 <link rel="icon" href="/vsdl_dpc.github.io/images/icon.png">
 
@@ -438,7 +438,7 @@
 -->
 
 
-<h1 class="center">MedISeg：面向医学图像语义分割的技巧、挑战和未来的方向</h1>
+<h1 class="center">LLM-FP4: 4-Bit Floating-Point Quantized Transformers</h1>
 
 <div class="post-info">
   
@@ -447,20 +447,20 @@
       
 
 <div class="portrait-wrapper">
-  <a href="/vsdl_dpc.github.io/members/dong-zhang.html" class="portrait" data-style="tiny" aria-label="Jane Smith">
-    <img src="/vsdl_dpc.github.io/images/dongzhang.jpg" class="portrait-image" alt="member portrait" loading="lazy" onerror="this.src = '/vsdl_dpc.github.io/images/fallback.svg'; this.onerror = null;">
+  <a href="/vsdl_dpc.github.io/members/dong-zhang.html" class="portrait" data-style="tiny" aria-label="Shih-yang Liu">
+    <img src="/vsdl_dpc.github.io/images/photo.jpg" class="portrait-image" alt="member portrait" loading="lazy" onerror="this.src = '/vsdl_dpc.github.io/images/fallback.svg'; this.onerror = null;">
 
     
       <span class="portrait-text">
         
           <span class="portrait-name">
-            Dong Zhang
+            Shih-yang Liu
           </span>
 
           <span class="portrait-role">
             
             <i class="icon fa-solid fa-microscope"></i>
-            <span>Research Assistant Professor</span>
+            <span>PhD Student</span>
           </span>
         
       </span>
@@ -477,14 +477,14 @@
   
     <span data-tooltip="Originally published on">
       <i class="icon fa-regular fa-calendar"></i>
-      <span>September 22, 2022</span>
+      <span>November 17, 2023</span>
     </span>
   
 
   
     <span data-tooltip="Last updated on">
       <i class="icon fa-solid fa-clock-rotate-left"></i>
-      <span>May 01, 2023</span>
+      <span>November 17, 2023</span>
     </span>
   
 </div>
@@ -500,35 +500,23 @@
   dark: ;
   size: ;
 -->
-<h5 id="title">1 研究动机</h5>
-  <p>我们这篇论文的出发点是想要解决大家一直以来诟病的一个问题，即深度学习模型的architecture和setting过于复杂，导致实验结果的比较存在不公平性。举个常见的栗子，比如大家都会用到的ResNet，几乎每个人都会在论文中说“Our backbone network is ResNet-50 or ResNet-101.”, 但是其实在部署的时候，ResNet的input stem存在两种不一样的形式，如下图：</p>
-  <img src="/vsdl_dpc.github.io/images/blog/mediseg1.jpg" alt="mediseg1" height="273"></a>
-  <p>其中，(b)是在(a)上面的一个改进，用于减少计算量的。这种改进被证实是可以显著的影响模型的识别精度的，但是少有人在自己的论文中介绍backbone network的时候提及这种改进。那么，基于这两种不一样形式的backbone的实验结果比较，显然是不公平的。</p>
+  <p>近年来，深度学习技术的飞速发展已经在各行各业得到了广泛应用。然而，深度学习模型通常需要大量的计算资源，这对于一些资源受限的场景来说是一个挑战。为了解决这个问题，我们提出了一种新的量化方法，即4位浮点量化，用于深度学习模型中的Transformer架构。文章发表在 Conference on Empirical Methods in Natural Language Processing (EMNLP) 2023上。</p>
+
+  <p>FP量化的准确度和exponent bits的设定以及量化的区间息息相关。不同的 FP format (浮点数的指数位 / 尾数位设定) 之间存在巨大的量化误差差异，只有当选取合适的 FP format 时，FP Quantization 比 INT Quantization 能更好的表示长尾分布。这个现象也在之前的论文中得到验证 [1]。为了解决这个问题，我们用一个 search-based 浮点量化算法，统筹搜索出最适合的浮点数的指数位 / 尾数位设定以及对应的量化区间。</p>
+
+  <p>此外，另一个同时出现在各种不同类别 Transformer 模型 (Bert,LLaMA,ViT) 中的现象也会严重影响量化的难度：那就是模型的 activation 中不同 channel 之间的数量级会有很高的差异，而同 channel 之间的量级十分一致。之前 LLM.int8 [2] 和 SmoothQuant [3] 也有类似的发现，不过我们发现这个现象不仅仅存在于 LLM 中，并且在其他 Transformer 模型里也有类似现象，LLaMA 与 BERT 以及 DeIT-S 中的 activation 的分布都发现了类似的现象。异常大的 channel 都比剩余的 channel 大很多，所以在量化 activation tensor 的过程中，量化的精度很大程度会被这些异常值决定，从而抑制其他 channel 值的量化区间，最终降低整体影响量化精度。这会导致量化的最终结果崩坏，尤其当比特数降到一定程度的时候。值得注意的是，只有 tensor-wise 和 token-wise 量化可以在 efficient matrix multipilication 的时候将 scaling factor 提取出来，而 channel-wise 量化是不支持 efficient matrix multipilication 的。</p>
+
+  <p>为了解决这个问题，同时维持高效率矩阵乘法 (Efficient Matrix Multiplication)，本文利用少量的校正资料集，预先算出 activation 的每个 channel 的最大值，从而计算缩放因子。然后将这个缩放因子一拆为二，拆解成一个 per-tensor 的实数乘以 per-channel 的 2 的幂。而这个 2 的整数次方即用 FP 里的 exponent bias 表示。 进一步地，在 calibration 完成之后，这个 per-channel exponent bias 就不再变化，因此可以和 weight quantization 一起进行预计算 (pre-compute)，将这个 per-channel exponent bias 整合进量化后的 weights 中，提高量化精度。</p>
+
+  <p>实验结果表明，我们提出的Floating Point Quantization (FPQ) 方法在 LLaMA, BERT 以及 ViTs 模型上，4-bit 量化皆取得了远超 SOTA 的结果。特别是，我们展示了 4-bit 量化的 LLaMA-13B 模型，在零样本推理任务上达到平均 63.1 的分数，只比完整精度模型低了 5.8 分，且比之前的 SOTA 方法平滑量高出了 12.7，这是目前少数已知可行的 4-bit 量化方案了。</p>
+  <img src="/vsdl_dpc.github.io/images/blog/llm_fp4_1.jpg" alt="llm_fp4_1" width="800"></a>
+
+  <h5 id="conclusion">参考文献</h5>
+    <p>[1] FP8 Quantization: The Powerof the Exponent, Kuzmin et al., 2022</p>
+    <p>[2] llm.int8(): 8-bit matrix multiplication for transformers atscale, Dettmers et al., 2022</p>
+    <p>[3] Smoothquant: Accurate and efficient post-training quantization for large language models ,Xiao et al., 2022</p>
 
 
-<h5 id="method">2 研究方法</h5>
-   <p>我们首先收集了一系列针对不同模型部署阶段的Tricks，这些Tricks主要可以被划分为以下6个方面：</p>
-   <img src="/vsdl_dpc.github.io/images/blog/mediseg2.jpg" alt="mediseg1" height="350"></a>
-   <p>其次，在这些Tricks的基础上，我们通过实验探索了这些Tricks在一致的基准模型和数据集上对于实验结果的影响。为了能全面的覆盖2D和3D数据，我们以医学图像语义分割数据为实验对象，选择了4个常用的医学图像语义分割数据集，即2D ISIC 2018，2D CoNIC，3D KiTS19和3D LiTS，所采用的基准模型分别是2D-UNet和3D-UNet。</p>
-  <h6 id="method">MedISeg的优势</h6>
-    <p>1). 我们的工作提供了大量扎实的实验，在技术上更具有更强的可操作性和更现实的指导性</p>
-    <p>2). 通过在2D和3D数据集上的大量实验，我们明确地阐明了这些Tricks对于实验结果的影响</p>
-    <p>3). 基于所调查的Tricks，我们开源了MedISeg源码和预训练模型库，其全面的覆盖了2D、3D数据集以及不同的语义分割方法</p>
-
-
-<h5 id="conclusion">3 研究结论</h5>
-  <p>Tricks本质上对应的是解决了语义分割任务中的一些Challenges。在本文中，我们主要围绕small dataset learning, class imbalance learning, multi-modality learning, 和domain adaptation四个方面展开了讨论。每一个Trick对应的Challenges分析请查看原文的Section 4。此外，Tricks的不同部署策略会带来效果上的差异。在本文中，我们对数据扩增中的策略展开讨论，发现不同的数据扩增方法组合在同样的数据集上带来的提升略有差异。另外，同样的策略在不同的数据集上也有有差异，这说明我们在选择Tricks的时候，还需要考虑到数据集本身的状况。比如当我们选择损失函数对应的Tricks的时候，选择的Tricks本质上是解决了class imbalance learning的问题，但要是我们的数据集中没有这个问题，那么这么Tricks就不能起到我们预想的效果。这其实也可以回答大家之前的一个疑问，为什么有些Tricks加在模型中是有效的，而有些是没有效果的，甚至有些时候Tricks之间好像是存在部署上的冲突的。本质原因就是由于Tricks解决的Challenges导致的。</p>
-
-<h5 id="conclusion">4 未来的方向</h5>
-  <p>对于本文研究的内容以及面向医学图像语义分割任务，将来可以在以下几个方面继续展开研究：</p>
-   <p>1). 调研和开发更多的面向医学图像语义分割的tricks。</p>
-   <p>2). 继续在更多的方法和数据集上探索其他tricks的有效性。</p>
-   <p>3). 前面提到的，tricks其实对应的是解决了语义分割任务中的一些Challenges。那么反过来，我们其实也可以利用tricks来指导我们的模型设计，使得我们的模型也具有“又好又快”的效果。</p>
-  </section>
-
-  
-  
-  
 
   <section class="background" data-size="page">
     <!--
