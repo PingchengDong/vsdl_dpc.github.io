@@ -509,7 +509,7 @@
   <p>为了解决这个问题，同时维持高效率矩阵乘法 (Efficient Matrix Multiplication)，本文利用少量的校正资料集，预先算出 activation 的每个 channel 的最大值，从而计算缩放因子。然后将这个缩放因子一拆为二，拆解成一个 per-tensor 的实数乘以 per-channel 的 2 的幂。而这个 2 的整数次方即用 FP 里的 exponent bias 表示。 进一步地，在 calibration 完成之后，这个 per-channel exponent bias 就不再变化，因此可以和 weight quantization 一起进行预计算 (pre-compute)，将这个 per-channel exponent bias 整合进量化后的 weights 中，提高量化精度。</p>
 
   <p>实验结果表明，我们提出的Floating Point Quantization (FPQ) 方法在 LLaMA, BERT 以及 ViTs 模型上，4-bit 量化皆取得了远超 SOTA 的结果。特别是，我们展示了 4-bit 量化的 LLaMA-13B 模型，在零样本推理任务上达到平均 63.1 的分数，只比完整精度模型低了 5.8 分，且比之前的 SOTA 方法平滑量高出了 12.7，这是目前少数已知可行的 4-bit 量化方案了。</p>
-  <a href="https://ibb.co/gFy3vHf"><img src="/vsdl_dpc.github.io/images/blog/llm_fp4_1.jpg" alt="llm_fp4_1" width="800"></a>
+  <img src="/vsdl_dpc.github.io/images/blog/llm_fp4_1.jpg" alt="llm_fp4_1" width="800"></a>
 
   <h5 id="conclusion">参考文献</h5>
     <p>[1] FP8 Quantization: The Powerof the Exponent, Kuzmin et al., 2022</p>
