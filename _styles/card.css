@@ -17,9 +17,6 @@
   width: 250px;
 }
 
-.card[data-style=medium] {
-  width: 400px;
-}
 
 .card-image img {
   aspect-ratio: 3/2;
