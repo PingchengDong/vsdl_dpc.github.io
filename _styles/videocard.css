@@ -3,7 +3,7 @@
   justify-content: stretch;
   align-items: center;
   flex-direction: column;
-  width: 800px;
+  width: 1000px;
   max-width: calc(100% - 20px - 20px);
   margin: 20px;
   background: var(--background);
