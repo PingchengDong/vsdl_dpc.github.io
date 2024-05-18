@@ -468,125 +468,37 @@
     <h1 id="projects">
 <i class="fa fa-book"></i> Research</h1>
 
-<p>Here, we show some of our completed projects and exciting demos, covering various aspects such as self-driving, robotics, scene understanding, ultrasonic image segmentation and human pose estimation.</p>
-
-<p>Particularly, we would like to express our gratitude to the colleagues at AI Chip Center for Emerging Smart Systems (ACCESS) for their teamwork and collaboration. ACCESS is a multi-disciplinary research center under the InnoHK initiative of the Hong Kong Special Administrative Region Government. Founded by HKUST in collaboration with world-renowned local and overseas universities, ACCESS is dedicated to advancing integrated circuit design and design automation technologies to enable novel data-centric computing paradigms to support a wide range of AI applications. You can find more information about <a href="https://inno-access.hk/">ACCESS</a> here.</p>
-
-<div class="tags" data-link="https://pingchengdong.github.io/vsdl_dpc.github.io/projects/">
-    
-      <a href="https://pingchengdong.github.io/vsdl_dpc.github.io/projects/?search=%22tag:%20project%22" class="tag" data-tooltip='Show items with the tag "project"'>
-      efficient Al algorithm
-      </a>
-    
-      <a href="https://pingchengdong.github.io/vsdl_dpc.github.io/projects/?search=%22tag:%20demo%22" class="tag" data-tooltip='Show items with the tag "demo"'>
-      efficient Al hardware
-      </a>
-    
-      <a href="https://pingchengdong.github.io/vsdl_dpc.github.io/projects/?search=%22tag:%20resource%22" class="tag" data-tooltip='Show items with the tag "resource"'>
-      AI applications
-      </a>
-    
-  </div>
+<p>Here, we introduce the research focus of our lab: efficient AI algorithm, efficient AI hardware, and AI applications.</p>
 
 <div class="search-info"></div>
-  </section>
 
-  <section class="background" data-size="page">
-    <!--
-  background: ;
-  dark: ;
-  size: ;
--->
+<div class="post-excerpt-container">
+  <div class="post-excerpt">
 
-<h2 id="more">Projects</h2>
+      <a href="/lab-website-template/2023/efficient_ai.html" class="citation-image" aria-label="Efficient AI Algorithms">
 
-<!-- project 1-->
-<div class="card" data-style="small">
-    <img width="450" src="/vsdl_dpc.github.io/images/projects/segdemo.gif" alt="segdemo" loading="lazy" onerror="this.src = '/vsdl_dpc.github.io/images/fallback.svg'; this.onerror = null;">
-  <div class="card-text">
-      <span class="card-subtitle">Road Scene Segmentation for Self-Driving/Robotics</span>
-      <p>
-      Image segmentation is a critical Al function for self-driving, driving assistant, and robotics systems. We developed a road scene segmentation prototype using the FPGA version of the AC-Transformer. It achieves a significant breakthrough by linearizing and quantizing the original vision Transformer model with a 5x reduction in model size for storage and a 45x reduction in computation workload while maintaining the original accuracy and inferencing efficiently on the co-designed accelerator. We are finalizing the ASlC version of AC-Transformer for tape-out in the TSMC 28nm process in early 2024.
+        <img src="/vsdl_dpc.github.io/images/papers/2024/2024_DoRa.png" alt="DoRA: Weight-Decomposed Low-Rank Adaptation" loading="lazy" onerror="this.src = '/vsdl_dpc.github.io/images/fallback.svg'; this.onerror = null;">
+      </a>
+    
+    <div class="post-excerpt-text">
+      <a href="/vsdl_dpc.github.io/research/efficient_ai.html">Efficient AI Algorithms</a>
+
+      <div class="post-info">
+ 
+    <span data-tooltip="Last updated on">
+      <i class="icon fa-solid fa-clock-rotate-left"></i>
+      <span>April 01, 2024</span>
+    </span>
+</div>
+      <p data-search="Large amount of memory and computation in current Convolution Neural Networks (CNNs) impedes their implementation in embedded systems. A bitwise CNN with weights and activations in a convolution layer being either -1 or 1 offers a promising solution to compressing the model size and speeding up inference.">
+        Large amount of memory and computation in current Convolution Neural Networks (CNNs) impedes their implementation in embedded systems. A bitwise CNN with weights and activations in a convolution layer being either -1 or 1 offers a promising solution to compressing the model size and speeding up inference.
       </p>
-  <div class="tags" data-repo="greenelab/lab-website-template" data-link="https://pingchengdong.github.io/vsdl_dpc.github.io/projects/">
-    
-      <a href="https://pingchengdong.github.io/vsdl_dpc.github.io/projects/?search=%22tag:%20project%22" class="tag" data-tooltip='Show items with the tag "project"'>
-        project
-      </a>
-      <a href="https://pingchengdong.github.io/vsdl_dpc.github.io/projects/?search=%22tag:%20demo%22" class="tag" data-tooltip='Show items with the tag "demo"'>
-        demo
-      </a>
-    
-  </div>
+    </div>
   </div>
 </div>
 
-<!-- project 2-->
-<div class="card" data-style="small">
-    <img width="450" src="/vsdl_dpc.github.io/images/projects/ultrasounddemo.gif" alt="ultrasounddemo" loading="lazy" onerror="this.src = '/vsdl_dpc.github.io/images/fallback.svg'; this.onerror = null;">
-  <div class="card-text">
-      <span class="card-subtitle">Real-Time lmage Segmentation of Ultrasound lmaging to Assist Cardiac Disease Evaluation</span>
-      <p>
-      Medical imaging equipment such as ultrasound scanners cansignificantly benefit from domain-specific Al accelerators, because CPUs, GPUs, or general-purpose NPUs may not meetthe high-performance and low-power requirements for real-timeimage analysis using large Al models. We developed a real-time cardiac image segmentation prototypefor a portable ultrasound scanner using the AC-Codesign-v1 chip. In a typical cardiac ultrasound Al-assisted diagnosis scenario, a speed of 50 FPS has been achieved with very high ventricle segmentation accuracy.
-      </p>
-  <div class="tags" data-repo="greenelab/lab-website-template" data-link="https://pingchengdong.github.io/vsdl_dpc.github.io/projects/">
-    
-      <a href="https://pingchengdong.github.io/vsdl_dpc.github.io/projects/?search=%22tag:%20demo%22" class="tag" data-tooltip='Show items with the tag "demo"'>
-        demo
-      </a>
-  </div>
-  </div>
-</div>
-<!-- end -->
-  </section>
 
-
-
-  <section class="background" data-size="page">
-    <!--
-  background: ;
-  dark: ;
-  size: ;
--->
-
-<h2 id="more">Demos</h2>
-
-<!-- demo 1-->
-<div class="card" data-style="small">
-<img width="450" src="/vsdl_dpc.github.io/images/projects/healthcaredemo.gif" alt="segdemo" loading="lazy" onerror="this.src = '/vsdl_dpc.github.io/images/fallback.svg'; this.onerror = null;">
-  <div class="card-text">
-      <span class="card-subtitle">Wellness Analytics for Elderly Healthcare basedon Facial Landmark Detection and Pose Estimation</span>
-      <p>
-      The growing aging population presents significant societalchallenges for many governments. To address the need for continuous monitoring of the elderly, our team developed an innovative healthcare solution that utilizes computer vision technology for continuous and automated monitoring of the elderly's facial expressions and postures. A prototype capable of identifying 128 key points of each human subject has been built, using Ac-Codesign-v1 chip, all within a power budget of ≤500 mW. 
-      </p>
-  <div class="tags" data-repo="greenelab/lab-website-template" data-link="https://pingchengdong.github.io/vsdl_dpc.github.io/projects/">
-    
-      <a href="https://pingchengdong.github.io/vsdl_dpc.github.io/projects/?search=%22tag:%20demo%22" class="tag" data-tooltip='Show items with the tag "demo"'>
-        demo
-      </a>
-  </div>
-  </div>
-</div>
-
-<!-- demo 2-->
-<div class="card" data-style="small">
-<iframe width="450" height="288" src="https://www.youtube.com/embed/6M5VXKLf4D4?si=NAtIMZSar1IRl0Mp"></iframe>
-  <div class="card-text">
-      <span class="card-subtitle">a subtitle</span>
-      <p>
-        Lorem ipsum <em>dolor sit amet</em>, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-  <div class="tags" data-repo="greenelab/lab-website-template" data-link="https://pingchengdong.github.io/vsdl_dpc.github.io/projects/">
-    
-      <a href="https://pingchengdong.github.io/vsdl_dpc.github.io/projects/?search=%22tag:%20demo%22" class="tag" data-tooltip='Show items with the tag "demo"'>
-        demo
-      </a>
-  </div>
-  </div>
-</div>
-<!-- end -->
-  </section>
-
+        </section>
     </main>
     
 
