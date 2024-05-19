@@ -13,8 +13,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  filter: brightness(1.5); /* 调整亮度 */
-  /* opacity: 0.25; */
+  opacity: 0.25;
   z-index: -1;
 }
 
