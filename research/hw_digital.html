@@ -387,13 +387,12 @@
   weight loading imbalance and activation reading difficulty. The weight compression and input activation
   scratch are the two most import processes. Since scratching activations is done on-the-fly which require
   lots of hardware resources, the key point of scratch pad is decreasing hardware resources. Thus, an efficient
-  data fetch method is important for an accelerator that supports sparse CNN.<br><br>
-
-  Regarding to quantization, compared with 32-bit float point, fixed point can reduce hardware resources, such as 
-  DSP, LUTs, and BRAM. Generally speaking, mixed-bit quantization requires less computation resources than a single bit
-  width while maintaining network accuracy. However, hardware architectures may become extremely complex to support
-  mixed-bit computation, as data flow, memory structure, and PE need to be reconfigured online to support multiple bit-width
-  computations. Thus, it is important for an architecture to support multiple bit-width computations.<br><br>
+  data fetch method is important for an accelerator that supports sparse CNN. Regarding to quantization, compared 
+  with 32-bit float point, fixed point can reduce hardware resources, such as DSP, LUTs, and BRAM. Generally speaking,
+  mixed-bit quantization requires less computation resources than a single bit width while maintaining network
+  accuracy. However, hardware architectures may become extremely complex to support mixed-bit computation, as data flow,
+  memory structure, and PE need to be reconfigured online to support multiple bit-width computations. Thus, it is 
+  important for an architecture to support multiple bit-width computations.<br><br>
 </p>
 
 
