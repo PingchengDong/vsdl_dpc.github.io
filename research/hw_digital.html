@@ -411,9 +411,36 @@
   are removed, further saving hardware resources. Compared to
   SISO SPad method, SIMO SPad method can reduce hardware
   significantly, saving 13.34% CLB LUTs, 46.24% CLB
-  Registers, and reducing 10% power.<br><br>
+  Registers, and reducing 10% power. Mixed-bit CNNs are better than one-bit
+  in terms of accuracy, model size, memory access and performance. However,
+  few accelerators can support both mixed-bit width and sparsity
+  because it is a challenge to implement 8-bit architecture to
+  effectively support 4-bit sparsity. We design a DSP-base PE
+  which can be configured to implement one signed INT-8
+  or two signed INT-4 convolution operations as shown in (d).
+  Since lower-bit multiplication would impact upper-bit multiplication when a
+  DSP conducts two signed multiplications, this work introduces
+  a method of using absolute values for multiplication
+  and then recovering sign bit for accumulate operation.<br><br>
 </p>
 
+<center><img src="./images/hardware/co-design cnn.png" align="middle" style="width:80%"></center>
+<p style="text-align: justify;">
+  We further proposed a compression-hardware co-design approach, which includes the developed toolchain and 
+  implemented accelerator architecture. The toolchain comprises three modules: NN Compression, Compilation, 
+  and Hardware DSE. The NN Compression module performs co-design pruning and hardware(HW)-aware quantization. 
+  The Compilation module handles co-design encoding and converting NN model to binary (Bin) files, which can 
+  be executed by the implemented accelerator as well as the Function Simulation of the Hardware DSE module.
+  The Hardware DSE module, which comprises Hardware Modeling and Function Simulation, evaluates the PPA and 
+  NN accuracy simultaneously for given hardware hyper-parameters and NN compression schemes in the design space.
+  The Hardware DSE can adopt search strategy such as greedy algorithm and tabu algorithm, to identify the optimal
+  architecture hyper-parameters, such as PE array dimension, that provides the best PPA performance. We proposed 
+  a 4-dementional CNN accelerator architecture hierarchically organized by N core elements, W computing cores, 
+  H Sparse PEs (SPEs) and M PEs, where N, W, H and M map to input channel number, output feature map width, 
+  output feature map height and output channel number, respectively. The accelerator calculates a W x H x M block 
+  of output feature maps in parallel. We take an target accelerator of 512 PEs as an example and search the hyper-parameter (N, W, H, M). 
+  <br><br>
+</p>
 
 
 <h5 id="conclusion">Reference</h5>
