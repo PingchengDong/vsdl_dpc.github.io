@@ -1,0 +1,25 @@
+.image-switch-buttons {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+  }
+  
+  .image-switch-buttons button {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s, background-color 0.3s;
+  }
+  
+  .image-switch-buttons button.active {
+    background-color: #007BFF; /* Customize the active button color */
+    opacity: 1;
+  }
+  
