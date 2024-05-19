@@ -380,7 +380,7 @@
 
 <h3 class="section-title">Mixed-Bit Sparse CNN Accelerator</h3>
 
-<center><img src="/vsdl_dpc.github.io/images/research/sparse_example.png" align="middle" style="width:80%"></center>
+<center><img src="./images/hardware/sparse_example.png" align="middle" style="width:80%"></center>
 
 <p>Regarding to pruning, unstructured pruning improves compression ratio, but the irregularity affects the performance of parallel computing. A sparse model not only requires decoding, but also causes weight loading imbalance and activation reading difficulty. The weight compression and input activation scratch are the two most import processes. Since scratching activations is done on-the-fly which require lots of hardware resources, the key point of scratch pad is decreasing hardware resources. Thus, an efficient data fetch method is important for an accelerator that supports sparse CNN.</p>
 
