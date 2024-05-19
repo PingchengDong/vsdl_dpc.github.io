@@ -324,6 +324,11 @@
           Contact
         </a>
   </nav>
+   <!-- Add buttons for background image switching -->
+   <div class="image-switch-buttons">
+    <button onclick="changeBackground('vision.jpg', this)" class="active"></button>
+    <button onclick="changeBackground('system.jpg', this)"></button>
+  </div>
 </header>
 
     <main>
@@ -510,6 +515,18 @@
 
   <input type="checkbox" class="dark-toggle" data-tooltip="Dark mode" aria-label="toggle dark mode" oninput="onDarkToggleChange(event)">
 </footer>
+
+<script>
+  function changeBackground(image, button) {
+    const header = document.querySelector('header.background');
+    header.style.setProperty('--image', `url('/vsdl_dpc.github.io/images/${image}')`);
+    
+    // Update button styles
+    const buttons = document.querySelectorAll('.image-switch-buttons button');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+  }
+</script>
 
   </body>
 </html>
