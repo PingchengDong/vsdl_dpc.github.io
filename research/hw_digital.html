@@ -394,7 +394,25 @@
   memory structure, and PE need to be reconfigured online to support multiple bit-width computations. Thus, it is 
   important for an architecture to support multiple bit-width computations.<br><br>
 </p>
-
+<center><img src="./images/hardware/SIMO_example.png" align="middle" style="width:80%"></center>
+<p style="text-align: justify;">
+  Unstructured pruning requires a customized hardware accelerator,
+  and the main issues for an accelerator are how to scratch
+  needed input activations and compress weights efficiently.
+  (b) shows a traditional architecture for weight sparsity.
+  Each PE is independent and calculates asynchronously,
+  so it has local SPad to fetch activations and FIFOs
+  to pre-store the weights and selection signals. We named this
+  traditional data fetch method as single input single output
+  scratch pad (SISO SPad). In this brief, a new fetch method,
+  SIMO SPad, is proposed to reduce hardware overhead, as
+  shown in (a). While sharing SPad reduces hardware consumption,
+  the FIFOs for pre-store weights and selection signals
+  are removed, further saving hardware resources. Compared to
+  SISO SPad method, SIMO SPad method can reduce hardware
+  significantly, saving 13.34% CLB LUTs, 46.24% CLB
+  Registers, and reducing 10% power.<br><br>
+</p>
 
 
 
