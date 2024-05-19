@@ -286,7 +286,7 @@
   <body>
 
 
-<header class="background" style="--image: url('/vsdl_dpc.github.io/images/background.webp')" data-dark="true" data-big>
+<!-- <header class="background" style="--image: url('/vsdl_dpc.github.io/images/background.webp')" data-dark="true" data-big>
   <a href="/vsdl_dpc.github.io/" class="home">
     <img src="/vsdl_dpc.github.io/images/logo3.svg" height="120">
     
@@ -323,6 +323,57 @@
         <a href="/vsdl_dpc.github.io/contact/" data-tooltip="Email, address, and opening">
           Contact
         </a>
+  </nav>
+</header> -->
+
+<header class="background" data-dark="true" data-big>
+  <style>
+    .background::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('/vsdl_dpc.github.io/images/background.webp');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(1.2);
+      z-index: -1; /* 确保背景图片在内容后面 */
+    }
+  </style>
+
+  <a href="/vsdl_dpc.github.io/" class="home">
+    <img src="/vsdl_dpc.github.io/images/logo3.svg" height="120">
+      <span class="title-text" data-tooltip="Home">
+          <span class="title">Vision and System Design Lab</span>
+      </span>
+  </a>
+
+  <input class="nav-toggle" type="checkbox" aria-label="show/hide nav">
+
+  <nav>
+    <a href="/vsdl_dpc.github.io/" data-tooltip="Home">
+      Home
+    </a>
+    <a href="/vsdl_dpc.github.io/publications/" data-tooltip="Published works">
+      Publications
+    </a>
+    <a href="/vsdl_dpc.github.io/research/" data-tooltip="Research of our group">
+      Research
+    </a>
+    <a href="/vsdl_dpc.github.io/demos/" data-tooltip="Demos, datasets, and more">
+      Demos
+    </a>
+    <a href="/vsdl_dpc.github.io/team/" data-tooltip="About our team">
+      Team
+    </a>
+    <a href="/vsdl_dpc.github.io/blog/" data-tooltip="Musings and miscellany">
+      Blog
+    </a>
+    <a href="/vsdl_dpc.github.io/contact/" data-tooltip="Email, address, and opening">
+      Contact
+    </a>
   </nav>
 </header>
 
